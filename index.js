@@ -79,9 +79,24 @@ app.get("/search", async (req, res) => {
       return Array.from(names).map((el, index) => {
 
         const findPhone = /\(\d{2}\)\s?\d{4,5}-\d{4}/;
+        const findPhoneBR = /\+55\s(\d{2})\s(\d{5})-(\d{4})/;
         const findAddress = /·\s[^·\n]+·\s([^·\n]+)\n/;
         const address = summary[index].innerText.match(findAddress) ? summary[index].innerText.match(findAddress)[1] : "Endereço não encontrado";
         const phone = summary[index].innerText.match(findPhone) ? summary[index].innerText.match(findPhone)[0] : "Telefone não encontrado";
+        
+        let phoneBR = null;
+        const match = summary[index].innerText.match(findPhoneBR);
+        if (summary[index].innerText.match(findPhoneBR)) {
+          const ddd = match[1];
+          const parte1 = match[2];
+          const parte2 = match[3];
+        
+          // Formatar para o padrão brasileiro
+          phoneBR = `(${ddd}) ${parte1}-${parte2}`;
+
+        } else {
+          phoneBR = "Telefone não encontrado";
+        }
 
 
         const siteMatch = websites.find(site =>
@@ -92,7 +107,7 @@ app.get("/search", async (req, res) => {
           name: el.innerText,
           website: siteMatch ? siteMatch.href : "Website não encontrado",
           address: address,
-          phone: phone,
+          phone: phone != "Telefone não encontrado" ? phone : phoneBR,
           summary: summary[index] ? summary[index].innerText : "Resumo não encontrado",
         };
       });
