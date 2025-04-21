@@ -33,14 +33,14 @@ The app will return a JSON with the results scraped from Google Maps.
 
 ```json
 {
-  "term": "energia solar em osorio",
+  "term": "Search term",
   "results": [
     {
-      "name": "Weedda Energia",
-      "website": "http://www.weedda.com.br/",
-      "address": "Rua Angelo Gabriel Boff Guasselli, 2005, Centro, CEP: 95520-000",
-      "phone": "(51) 99676-3061",
-      "summary": "Weedda Energia\n3,1(146)\nFornecedor de equipamentos a energia solar ·  · Rua Angelo Gabriel Boff Guasselli, 2005, Centro, CEP: 95520-000\nAberto ⋅ Fecha às 11:45 ⋅ Reabre às 13:30 · (51) 99676-3061"
+      "name": "Company Name",
+      "website": "http://www.companywebsite.com.br/",
+      "address": "full address",
+      "phone": "(99) 3132-4444",
+      "summary": "Summary text from google maps"
     }
   ]
 }
